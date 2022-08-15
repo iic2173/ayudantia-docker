@@ -20,3 +20,5 @@
 
 ## Invitar a profundizar y reforzar siguiendo la documentación oficial de Docker, como diseñar y reutilizar sus contenedores, etc...)
 
+https://docs.docker.com/
+https://docs.docker.com/get-started/
