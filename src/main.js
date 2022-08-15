@@ -2,6 +2,12 @@ const Koa = require('koa');
 const { Client } = require('pg')
 const app = new Koa();
 
+const DATABASE_USER = process.env.DATABASE_USER || 'dcc'
+const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || '1234'
+
+console.log(DATABASE_USER)
+console.log(DATABASE_PASSWORD)
+
 // response
 app.use( async (ctx) => {
 
@@ -10,10 +16,10 @@ app.use( async (ctx) => {
 
   // Database request
   const client = new Client({
-    user: 'dcc',
+    user: DATABASE_USER,
     host: 'db', // Because using docker the name of the host is the name of the container
     database: 'dcc',
-    password: '1234',
+    password: DATABASE_PASSWORD,
     port: 5432,
   })
   await client.connect()
