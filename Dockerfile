@@ -18,7 +18,7 @@ RUN yarn install
 COPY . .
 
 # Run command to start the process runing a shell command using node
-CMD [ "sh", "-c", "yarn nodemon src/main.js" ]
+ENTRYPOINT [ "./start.sh" ]
 
 # This is for documentation only, the port muyst be exposed manually or in compose definition.
 EXPOSE 3000
