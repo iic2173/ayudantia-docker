@@ -26,8 +26,6 @@ services: # The containers we are going to run
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: dcc
-    ports:
-      - "5432:5432" # Expose to the local machine, for example to use a db UI like pgAdmin, etc...
     
     volumes:
       # To persist the data in the database we have a volume that persist after container deletion

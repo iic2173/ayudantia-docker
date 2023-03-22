@@ -1,19 +1,24 @@
+const Router = require('@koa/router');
 const Koa = require('koa');
 const { Client } = require('pg')
-const app = new Koa();
+
+const logger = require('koa-logger')
+
 
 const DATABASE_USER = process.env.DATABASE_USER || 'dcc'
 const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || '1234'
 
-console.log(DATABASE_USER)
-console.log(DATABASE_PASSWORD)
+const app = new Koa();
 
-// response
-app.use( async (ctx) => {
+router = new Router();
 
-  // Initial request
-  ctx.body = 'Hello DCC!';
+app.use(logger())
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
 
+
+router.get('/', async (ctx, next) => {
   // Database request
   const client = new Client({
     user: DATABASE_USER,
@@ -26,6 +31,10 @@ app.use( async (ctx) => {
   const res = await client.query('SELECT * FROM ayudantes;')
   ctx.body = res.rows;
   await client.end()
+});
+
+router.get('/test', async (ctx, next) => {
+  ctx.body = "Hello world!"
 });
 
 app.listen(3000, () => {
