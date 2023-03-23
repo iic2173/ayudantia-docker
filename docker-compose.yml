@@ -19,7 +19,7 @@ services: # The containers we are going to run
 
   db: # The database service
     image: postgres # Using the oficial dockerhub image
-    container_name: postgres
+    container_name: postgres-deployment
     networks:
       - app-network # Connect to the network to be used by other containers (ej: the web server)
     environment: # all the enviroment variables defined in the container (see postgres official image docs https://hub.docker.com/_/postgres)
