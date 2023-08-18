@@ -1,0 +1,5 @@
+psql -U arquisis -d dcc
+CREATE TABLE ayudantes (nombre  text);
+\dt
+INSERT INTO ayudantes(nombre) VALUES ('Edison');
+SELECT * FROM ayudantes;

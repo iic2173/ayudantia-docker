@@ -1,12 +1,13 @@
+---
 services: # The containers we are going to run
   app:
     build:
-      context: ./ # The path in the machine that have the files, in this case root
+      context: ./project # The path in the machine that have the files, in this case root
       dockerfile: Dockerfile # The name of the Dockerfile definition
     container_name: app
     restart: unless-stopped
     volumes:
-      - ./src:/app/src # To copy changes in the local machine to the container.
+      - ./project/src:/app/src # To copy changes in the local machine to the container.
     ports:
       - "3000:3000" # To expose the app to the machine localhost (machine-port:container:port)
     networks:
@@ -30,7 +31,9 @@ services: # The containers we are going to run
     volumes:
       # To persist the data in the database we have a volume that persist after container deletion
       # and copy the files from the container to the volume.
-      - db-volume:/var/lib/postgresql/data 
+      - ./db/init-db.sh:/docker-entrypoint-initdb.d/init-db.sql # To run the init.sql script in the container
+      - ./db/init-user.sh:/docker-entrypoint-initdb.d/init-user.sh # To run the init.sql script in the container
+      - db-volume:/var/lib/postgresql/data
 
 networks: # All the networks that connects our containers
   app-network:
